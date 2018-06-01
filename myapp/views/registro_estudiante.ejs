@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.1.css">
+    <title>Registro Estudiante</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+</head>
+<body style="background-image: url(img/imagen2.jpg)">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img style="width: 100px; height: 40px; margin-top: -10px;" src="img/images.png"></a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li ><a href="/administrador_login">Soy Administrador</a></li>
+                <li><a href="/login_estudiante">Soy Estudiante</a></li>
+                <li><a href="/login_profesor">Soy profesor</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.uniajc.edu.co"><span class="glyphicon glyphicon glyphicon-home"></span> UNIAJC</a></li>
+              </ul>
+            </div>
+        </nav>
+    <div class="loginBox">
+        <img src="img/estudiante.gif" class="user">
+        <h2 style="color:aquamarine">Registro Estudiante</h2>
+        <% if(message.length > 0) { %>
+            <div style="color:aqua;" class="alert alert-danger">
+             <%= message %>   
+            </div>
+            <% } %>
+            <br/>
+        <form action="/registro_estudiante" method="post">
+            <label style="color: aquamarine;" for=email>Correo</label>
+            <input type="text" name="email" placeholder="Ingresa Tu Correo">
+            <label style="color: aquamarine;" for=password>Contraseña</label>
+            <input type="password" name="password" placeholder="••••••">
+            <input type="submit"  value="REGISTRO">
+            <a href="/login_estudiante">Volver a Login</a>
+        </form>
+    </div>
+</body>
+</html>

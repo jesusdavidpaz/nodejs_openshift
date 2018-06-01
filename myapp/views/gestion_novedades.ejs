@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html ng-app="aplicacion">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gestion Novedades</title>
+    <!--<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="css/maps.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+<!--<script type="text/javascript" src="js/jquery.min.js"></script>    -->
+<!--<script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/script_novedad.js"></script>
+</head>
+<body style="background-color:cornflowerblue">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/menu_administrador"><img style="width: 100px; height: 40px; margin-top: -10px;" src="img/images.png"></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li ><a href="/gestion_novedades">Gestionar Novedades</a></li>
+            <li><a href="/gestion_equipos">Gestionar Equipos(Computo)</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"><span class="glyphicon glyphicon glyphicon-home"></span> SALIR</a></li>
+          </ul>
+        </div>
+    </nav>
+    <br/><br/><br/>
+    <table id="form-control2">
+        <tr>
+            <td>COORDENADAS DE LAS DIFERENTES SEDES UNIAJC</td>
+        </tr>  
+      <tr>
+            <td>Sede sur Latitud: 3.333087 Longitud: -76.524260</td>
+        </tr>
+        <tr>
+            <td>Sede Norte(Av. Sexta) Latitud: 3.472282 Longitud: -76.527164</td>
+        </tr>
+        <tr>
+                <td>Sede Av. Estacion Latitud: 3.467109 Longitud: -76.525104</td>
+            </tr>
+    </table>
+    <div class="container" ng-controller="novedad" ng-init="cargarNovedad()">
+      <center><h2 style="margin-top: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif" >GESTION DE NOVEDADES</h2></center>
+      <br/>
+        <center><img src="https://casa-ambar.com.ar/wp-content/uploads/2017/11/novedades-300px.png" title="novedad" alt="novedad" style="width:300px; height:300px;"></center>
+            <center><input type="button" style="margin-top: 50px;" class="btn btn-info" data-toggle="modal" data-target="#crearnovedad" value="&nbsp;INSERTAR NOVEDAD"  style="width:40%"></center>
+            <br/><br/>
+            <div class="modal fade" id="crearnovedad" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                         <center> <h5 class="modal-title" id="exampleModalLongTitle">REGISTRO DE NOVEDADES</h5></center>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                                <form action="/gestion_novedades" method="POST" enctype="multipart/form-data">
+                                        <br/>
+                                        <center><label class="col-form-label">NOMBRE DE LA SALA:</label>
+                                        <input type="text" class="form-control" ng-model="nombre" name="nombre" placeholder="Ingrese El Nombre De La Sala" >
+                                        <br/>
+                                        <label class="col-form-label">SEDE:</label>
+                                          
+                                          <select class="form-control" ng-model="sede" name="sede">
+                                              <option value=" "></option>
+                                            <option value="Sede Central (Av. Sexta)">Sede Central (Av. Sexta)</option>
+                                            <option value="Sede Sur (ParqueSoft)">Sede Sur (ParqueSoft)</option>
+                                            <option value="Sede Av. Estacion 1">Sede Av. Estacion 1</option>
+                                          </select>
+                                        <br/>
+                                        <label class="col-form-label"> LATITUD:</label> 
+                                        <input type="text" class="form-control" ng-model="latitud" name="latitud" placeholder="Ingrese La Latitud De La Sede" >
+                                        <br/>
+                                        <label class="col-form-label"> LONGITUD:</label> 
+                                        <input type="text" class="form-control" ng-model="longitud" name="longitud"  placeholder="Ingrese La Longitud De La Sede" >
+                                        <br/>
+                                        <label class="col-form-label"> FECHA_HORA:</label> 
+                                        <input type="datetime-local" class="form-control" ng-model="fecha_hora" name="fecha_hora">
+                                        <br/>
+                                        <label class="col-form-label"> TIPO_NOVEDAD:</label> 
+                                        <select class="form-control" ng-model="tipo_novedad" name="tipo_novedad">
+                                                <option value="Salas Averiadas">Salas Averiadas</option>
+                                                <option value="Falta De Energia">Falta De Energia</option>
+                                                <option value="LLuvia Torrencial">LLuvia Torrencial</option>
+                                                <option value="Falta De Agua">Falta De Agua</option>
+                                                <option value="Normalidad">Normalidad</option>
+                                                <option value="Cancelacion De Clases">Cancelacion De Clases</option>
+                                                <option value="Recupercion De Clases">Recupercion De Clases</option>
+                                              </select>
+                                           <br/>
+                                           <label class="col-form-label"> EVIDENCIA:</label>  
+                                           <input class="btn btn-primary" type="file"  name="foto" ng-model="foto"/>       
+                                        
+                                        
+                                    </center>
+                                    
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="limpiarDatos()">Cancelar</button>
+                          <button type="submit" class="btn btn-success">Guardar Registro</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>   
+                </form>
+                &nbsp;&nbsp;&nbsp;&nbsp;<label class="col-form-label">BUSQUEDA POR CUALQUIER ITEM:</label>
+            <input type="text" class="form-control" placeholder="Busqueda" ng-model="buscador" style="width:30%">
+                <table class="table">
+                  <thead>
+                      <tr>
+                          <th> Nombre De la Sala </th>
+                          <th> Sede </th>
+                          <th> latitud </th>
+                          <th> longitud </th>
+                          <th> Fecha_Hora </th>
+                          <th>Tipo_de_Novedad </th>
+                          <th>Evidencia(Foto) </th>
+                          <th>Eliminar  </th>
+                          <th>Editar  </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="novedad in novedades |filter:buscador|orderBy:tipoOrden">
+                          <td> {{novedad.nombre}} </td>
+                          <td> {{novedad.sede}} </td>
+                          <td> {{novedad.latitud}} </td>
+                          <td> {{novedad.longitud}} </td>
+                          <td> {{novedad.fecha_hora}} </td>
+                          <td> {{novedad.tipo_novedad}} </td>
+                          <td> <img height="200" width="200" ng-src="{{novedad.foto}}"> </td>
+                          <td> <a class="btn btn-danger" ng-click="eliminarNovedad(novedad.id)"> Eliminar </a> </td>
+                          <td> <a class="btn btn-info" data-toggle="modal" data-target="#editarnovedad" ng-click="recuperarNovedad(novedad.id)"> Editar </a> </td>
+                          <div class="modal fade" id="editarnovedad" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                 <center> <h5 class="modal-title" id="exampleModalLongTitle">ACTUALIZAR NOVEDADES</h5></center>
+                                  <button type="button" class="close" data-dismiss="modal" ng-click="limpiarDatos()" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                        <form action="/gestion_novedades" method="POST" enctype="multipart/form-data">
+                                                <br/>
+                                                <center><label class="col-form-label">NOMBRE DE LA SALA:</label>
+                                                <input type="text" class="form-control" ng-model="nombre" name="nombre" placeholder="Ingrese El Nombre De La Sala" >
+                                                <br/>
+                                                <label class="col-form-label">SEDE:</label>
+                                                  <select class="form-control" ng-model="sede" name="sede">
+                                                      <option value=" "></option>
+                                                    <option value="Sede Central (Av. Sexta)">Sede Central (Av. Sexta)</option>
+                                                    <option value="Sede Sur (ParqueSoft)">Sede Sur (ParqueSoft)</option>
+                                                    <option value="Sede Av. Estacion 1">Sede Av. Estacion 1</option>
+                                                  </select>
+                                                <br/>
+                                                <label class="col-form-label"> LATITUD:</label> 
+                                                <input type="text" class="form-control" ng-model="latitud" name="latitud" placeholder="Ingrese La Latitud De La Sede" >
+                                                <br/>
+                                                <label class="col-form-label"> LONGITUD:</label> 
+                                                <input type="text" class="form-control" ng-model="longitud" name="longitud"  placeholder="Ingrese La Longitud De La Sede" >
+                                                <br/>
+                                                <label class="col-form-label"> FECHA_HORA:</label> 
+                                                <input type="datetime-local" class="form-control" ng-model="fecha_hora" name="fecha_hora"  placeholder="YYYY/MM/DD" >
+                                                <br/>
+                                                <label class="col-form-label"> TIPO_NOVEDAD:</label> 
+                                                <select class="form-control" ng-model="tipo_novedad" name="tipo_novedad">
+                                                        <option value="Salas Averiadas">Salas Averiadas</option>
+                                                        <option value="Falta De Energia">Falta De Energia</option>
+                                                        <option value="LLuvia Torrencial">LLuvia Torrencial</option>
+                                                        <option value="Falta De Agua">Falta De Agua</option>
+                                                        <option value="Normalidad">Normalidad</option>
+                                                        <option value="Cancelacion De Clases">Cancelacion De Clases</option>
+                                                        <option value="Recupercion De Clases">Recupercion De Clases</option>
+                                                      </select>
+                                                   <br/>
+                                                   <label class="col-form-label"> EVIDENCIA:</label>  
+                                                      
+                                                   <label class="col-form-label"> ¡¡¡¡¡NO PUEDES CAMBIAR DE IMAGEN, SOLO AL INGRESAR UN DATO!!!!!</label> 
+                                            </center>
+                                          </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="limpiarDatos()">Cancelar</button>
+                                  <button type="button" class="btn btn-success" ng-click="modificar()" data-dismiss="modal">Guardar Registro</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>   
+                        
+</tr>
+</tbody>
+</table>
+                  </div>   
+                  
+</body>
+</html>

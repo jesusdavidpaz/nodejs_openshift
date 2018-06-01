@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html ng-app="aplicacion">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gestion Equipos Computo</title>
+   <!-- <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />-->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>    
+<script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/script_equipo.js"></script>
+</head>
+<body style="background-color:cornflowerblue">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/menu_administrador"><img style="width: 100px; height: 40px; margin-top: -10px;" src="img/images.png"></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li ><a href="/gestion_novedades">Gestionar Novedades</a></li>
+            <li><a href="/gestion_equipos">Gestionar Equipos(Computo)</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"><span class="glyphicon glyphicon glyphicon-home"></span> SALIR</a></li>
+          </ul>
+        </div>
+    </nav> 
+    <br/><br/><br/>
+    <div class="container" ng-controller="Equipos" ng-init="cargarEquipos()">
+      <center><h2 style="margin-top: 30px; font-family: Verdana, Geneva, Tahoma, sans-serif" >GESTION DE EQUIPOS DE COMPUTO</h2></center>
+      <br/>
+        <center><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUTEhIVFRIVFRUVFRUWFRUVEA8VFRIWFxUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0lHR0rLS0tLS0rLS0tLSstLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLS0tNzcrLS0tLTc3K//AABEIAKQBNAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAGAgMEBQcAAQj/xABNEAACAQIDBAUHBwgIBAcAAAABAgADEQQFIQYSMVFBYXGRsRMiMmKBocEHFCNCcpLRJFJTgqKy4fAVM0NUc5PC0kRjg7MWNEV0w9Pi/8QAGAEAAwEBAAAAAAAAAAAAAAAAAAECAwT/xAAgEQEBAAICAgMBAQAAAAAAAAAAAQIRITESQQMyUSJC/9oADAMBAAIRAxEAPwDFK5849s7onlb0j2zgZ0S81HqLbZmpasvXpDPpgJkj2rJ9oQ9Yama49M8u3CLAnixYEZFLFiJAi1gChHFESBHFgCgIu08EUBEmgvaY7mMoONDvL7DvCXmx20+MbypfEO5V7WY306bSm23FqlFuTeBiMgbdNbo+maL2v0Z+UPN2xGIBY33VA+PiTB3CNZ17R4x3PKu9Wc+sfGRaZ1EW+Va4bFTEdURnD6qDzA96gyQJTJ7aKAnKIoCJTwrBXZygrY3FowBF0YA89dffC20F8k0zPEDnTB7iPxgBAcpT6pdexyR3NcTz+jnGq1b/AGlF+9SJZAT2LYVmSbR19+rSBO9Sbd47ytoDcb3DjLpdosSOKX/VHwMFMnW2OxI5lD3p/CE0LINp1DbBQwFcCmDfU3HAX6Y9k22+ExKsyMwCnd84Wv1jqgH8oC/QKeT+KmVHyXgFaoIuLjjF4xUt02zCZlSqGyOCeXTJNSoF4kDtNoA5OgTHUraA74IHA+YSPCB/ynbVtVxq0KbEU6Di9jo731v2cJNx5OVtXzlL23lv2iO3mZZx5mFaqhKuE3gQeBteU2wu01WnTD1arFPKEuWJOmvSY/AeTZp0y/Idtq+Mr1wrbtMN9GLcFGmvbxl7l+e1hUdGIYLum542bjJ8KfkMp5PV1E9kmTacZ7OgZM6ezoE+S6/pGeLOr8Z4hjn2o9JGBa1RT6w8Zoga/cJm9E+cO2aDhWuB1qJtj0jLtKWOCIEcEpJYiwIgRwQMpRHVESgjgEVJ6IoTxYsCCAh8oCfRoeTSBQfdNQ83v3op+Mudvaf0APJhB8nzL81Q/sKPhCdr9KLHtd2PMxpeM9xB1iVmX+q1nTYssa9JDzRD+wJMErdnnvQpf4ae4EfCWYmlZFLFiIEcWIPbQUwmmbt61H4j8IWQTrebm1P1qZHuP4RiDMRU8EVJAZwWmY1hzp0z+8ITQbUWzI+tRX3MfxhJHQG9vV/Jv11g/wDJW3nVR1CEu3K3wrdTJ+9BL5L3tXcc1gc6rRMObYzDn1yO9GmL50fy2tf+8VP+6Zs9TTEUD/zV99x8ZjO0Atja/wD7ip/3DJy9Kw9tZzzXAN/hfCZ5lx/IX7WmiZnrl7f4P+mZzlv/AJJ+1pcSn/JY301QerDugbYmqP8Alqe4mZ98l7flLD1Ifqfythzo+Bk49Hl20bDm6qeoeEXGcA16aH1R4R+ZLeTp7PIG8nTp0CfJFTjPEi8QIhIXjM50WvGHuVvdEPqwBhvkT3pJ3TbBGa4WOLGkjqy0HFjgjaxawB1I6BG0jgiKliLiFixBKh22S+GbqsYKA3op9jwYiG21VO+GqdkBsO35Oh5bw99/jCdq9KKvxiVntQzwTD/TedNV2Ta+Gp/Yt3M0uxB3Yl74ZOrfHc/8YRTasSxHFjamOLECoJZv5uZ4U8ww9xhcIJbT6Y3Bt6xHfGBnFCJihJAcxWmZU/Wot7nH4wkg3nGmPwx5pUHvUwkjoUe2i/klTq3T+0ID/Js1sWw6j4w92tF8JV+zfuMzvYN93Hdu8PfF+HOq0/Gmz0jyq0/3xMe2rFsfiP8AHf8AfM17OGsob810Pc4MA/lafD/PAKNLcqboaqw08ozcNOfXFlOIrEa4o3y8/wCD/pgJsrgvL0RRvbfqbt+V+mHCG+BA6TSsO6COxLinTZ2BvSqb33eMuJdszlZweZ1MOXDlARvDgeB1HQdYX1WtjU66TCZ7kOa7+YVK50Ds7XPQCdL+yaBg8IcUy1VcWVrE2vp0gRY9DLtouUG9FPsiS5W4TFJTRVvwFuEVVzakurOAOvSZWNNrC88lSu0OGJsKyE9okn+kqf54hqjaZOjVOpvC4IInRaD5PrRsRdRo2Is7/RzoqGWzbXojqaBkLtk2vScciJr8VTmIlMdUxlDHFM1Zn1i4yDHEgD6GOiMIY8piKnBHVjSxxYJiHnSXoVB6p8JmG+3zcBeAdwbdizVsct6bDmp8JnGR0771xojsTpfQowGnbaLtpA70T1Z04TnnFbNH2Ce9C3Jn/wBJhUDAzYCp9Ew5P4p/CGAadDC9liPKYwDHVMAeEEttjarhG5VgPeIVgwU2/wBFoNyrLAQYqYsRik2g7B4RxTEA9tKbYnCN67jvW/whJvQa2u0bDNyreKkS5qYxR06xgxtKL4WsPUbwmY7K1LY5T1maRi8WKilCPNYEHsMzSinksYxRSURyLjWw6zFZ0c9tOzXEKylAdT08pk+02YGvialQ8937unwhsmYq4O6wsOOov2QKysD5zd7BSW48Be8Mp1DxGaZyiUaYLXJCqov0nqkGmRhlqgbzFt4kFTu3briK2TUnYN5XUWtYDS0uKa1SLGqXFuQlpCuz5CI9NwQKmhsNQLc+iF2z2L+bp5KjUaxN7Fbm5jmCbcBDUi3Ky6iUGabVVka1CgUsSCWS5J6CJPEh82iHPdsq+EKqbOzi4vpu9ZlLi8+qYqwrVF3b+iPNv7ZRU88r1Km9XpippYbyHTl7IeZdgaFRAxoXPTugbt+qE12LDOU7K06iioinj0OeIhrhGemgU0d5VFr3uZGwGMSigRaDhRyAtLGnndLdNwymxtvDQm3CK20RNyQ3p3AIBYkDkJ07Z6upw9M3Goue0m86Z1UfMGIw7I26w18RGpYZg5axPXK+Rnj41eN3HohRsc39YOq8FoR7Hv8ASMOamX8XZZ9CpGjgMjK0eVpuySEMcUyOGjgaASFMeRpGVo4rQCSpjimMKY4piTYXW1BHVMzwaVr4hKIJfeGii7btyD4zSmMDdmGRcxqipfcIe9jY8RbWKqxoYxmT1qVPylVGQF9wBgQSd0mQBNN23q4F8MyqzmqtmQbwIDcNRfhYmZlMcpqtcbsa7A1PNcesp/ZYQzDQB2GfWoPsH9q3xhslSbzpllOUoNH1aQ1aPU2glLBgv8og/J1PKophIGg/t4L4RuoqffJVBDhal6an1R4Tx8Yq8WlBSxTGmgvpujwjb1QNSZWgm5tVSsADfzG3xbmvCV1TOKfOV+LzlRUWkupY6+qLdMvcHk1KtSUtToNp9Y2bj0w4CjzzMqgpb1MjeJsANSBb0ox8n9WjvVBibWY387pNoRvsjR/R0x2VCPjI52QoDXdX/Ni97PfC2q5blbfVp37JGTZ/Lyf6tT2XkellNJOCr/mSbhGFMkoq68fpAYaJ6cowiehTt7GkjCJSS+6rC/qmJq5sVBJQaC/piA+ZbfVmf6EBEAtYgEt1kwt12cm11tftDWpWTDo2ouX3TddeAECq+bYpjdme/wBm3wiqu0eJdrtUPZwEJtl88qVqoR6SOliTw3wo9Y8bRTnqn13HmyWbVGqItUKUtwZTvE3tobcZr2HwwUWAAEG6OKoqbjDt1Gwlj/4jT9HU7oXkppcLSuQJX7YoqYctbzt5QPaY3hdpqQNylTt3bgSp26zjfp0jRRqlMMXdlBsltAG5cfdJkuz40AWz+pQO59KguSB0WJ4+6dNLwmytDFU6daoDvMg4HQCdL8oWmE4jhIEnuRbXhIT2vpwmXyr+MmXOy72rDrBlNLPIHtWTtk/F9jz6GG9xjiPI1RvOMUrTpZJgeOI0iK0dR4BMVo6rSIrR1GgEtGjwaQ1aOK8Ak3gMmFD5i1NgbVN5bKQGNxcWJ4cIZh4HYptzMkbrB90VhyLPEbBi9wtX2vTPxg7tNs8cKEax3WJGpB1AB6PbNCp5sGNvP9qkCUPygtvYZDyqj3qwk5TgY5ch7Yx/pH+x4MIbK0Atk3tVPWjfAw1Rr6CVj0Mu01Gj6vIJa3EgdXE90Q2J5d5/CMlr5a386d8r8zq06qGm43lPEXIv7RrIj1CeJkLGY1aYuTDRaSMHlleq7JS3QigW3mN7aDlPMZszjx6PkiOZZr+EnbM50tJ2JW4ZQONum8Jm2loEahh7AYrabMhsbjd7eVEB43Dj4iWWF2ezFRqgt9tfwhvSz3DMdKoHaCI9UzugNPKr3yd2GEaeQ4g6uoJ62FvCEGU4Qom7UCk30sNAI9UzrD/pF75HrZ3QVWIcEgEiwY3NtOAj5JYMKa+kFHbYSBicxwSnznpX9h8JkWbZ3WxL79VrkeiOCp2CQmqk8TJlivCttwlfBVvNQ0yT0WsT2RqrsZhG18kvdMgFdgABUNuNrmynnNR2DzBvIqHrK5YtZN69Zd0m5t0KRbjGR8bC4b9Esl4XYfCqbikPfCSk1xJKJFsyFwygAADQWiXoryEkWntNLsOrWIaLTL03bBRfx5ykyfcGLxGGsCm6CV4rfS/jClP4wJ2MY1cXiq59EkgHta49wEU9nYNKaBQFUAAaADgJ7PN6dJVw+YsvrEVUYFdHU62txHG/REZ/hXSs2+AN43BFt0g8iNIndXiRe3Rz6po+b7B4OpRL4csj7u8oFTeRtL2Ia598vOWzSMbIyiTMre1RT1iRaiFSQeINj2iOYU2Ydo8Zlhxk0y6GmIbzolXiMS3A8wI2HnUwTVeOq0gq8dWpAJ6vHVeQFqR1akDT1aOB5BWrHBVgEzfgnnzbuMot1r+9CNXvKzNsvSoyuzkMvACxGhvrCnKMayIulxfkSB4wN27xp8kKZCjea4sysSF6bKTYa9JhVjcnShR+cVMWyJuhr8Cbi4A3SCxme4/D4rGpUxIVzQoKbM7E6b3AXvc63NtBM8suDxnKHsy1q461cfsmGhxJPCwHIaQAyrEeTqq1uBPvBEI2zXlx98rDoZ9rneiKmJVZCyzCYnFMVpJwFyWO6AL26dZe4bZCuhDOoc8tCndfWVtKFg8DiMQpNJPNH1mO6pPIGVuL2QzBzeydW6+ghn5LFqLCnYDgAWAHZZ54GxX5jd7/AImTeTnANpbJZiv1Qf8AqiS6Wz+N+vTH+ZeFAxOJH1X/AGvwiTmFfpDd/wD+YchW0MiqrwCDrJJPuEIMFhyqANZmHE9Blac2qDip/Z/AThnTfmn7q/7ockufJdQ7ooYZToVB9koztDbjp2qP98ep7RDot91vgYaoS3yCgf7JfuiMvsxQP9kn3RPRtEBxX3OP9McG0qdXew8Vi1TRxslh/wBCn3RLbKcgo0TvIiqbW0AEirtNS6vvD4yTT2lo/wAun4w5C8VY5eUqbQ0uvvU+Bjq5/S5N92/hFqmti0k4Knp1nX2SkGc0TbVgOnzW/CXOBzKi/ouL8jcH3yaIRtHifJYaq49LdKrz3m80eMh7NUKdLD0woAuLnmSeJMi7c4uy06fWah7BovvJ7pXbJPdWJNzf3COT+RbyMhOkcVG5TpJvmyl5PpLHsFhLJM4RRoToOAGvfGE2bqHjUHcTJVDZVfrVGPZYfjNN5fhan6HMa4Z2I4E3146xumdRLbaTLFoMm5ezDpN9QZTrMLLM2k5guxL3RD1CMK89Zr0UPUJHDTrc1TEqRxakhb0cpknhAbTFeLFWN08K3Em0kIqjgL9ZiUdoozdQ5nhH95F9Y9wkWo/dEq0DSnrE9nLojFUzxqoAnVctrOu8LKD0noHO3OBGsEvz+uGxuJVcNRO4lPeCtU3dNymnHhbebjrbs0NM9waUyiECmqkBBTcJYDhYra0y/C5vSQ7tgBw0G6faQNT2yyavRqoQtS1wRruki47ZExXaBnrMSTfU66fCW2zjavfkvxnjZKgOtcDtRrd8l5bgadMm+JpkG3C4OnbM8McplyrKyzgcbCY1Eq1N42ug6CfrDlDhMzpHg4948Zl+X16CG4qr16+cfbLf+laQGlTu18JtcWex8tZW4MD2ERLUhM4rZrfRTp2HxMfwuMr2I8vUVPVOq9YJBAk+J7HTC0aNQQeGWVmAPzuvYi+rJfX9WIfKa395qn9e3haLQ2XtZtKmDVfMDu990E2Ata5J1PT0TLMzz+tWqGozsCeCqSqKOSgGFG0+zGJrFSH392/p1HY2PK97QdfZHFj6gPYw+MjLy9Kx0qmxjnpM9p4pgeJk1tmsWP7E+wqfjG2yTEjjQqexb+EJll7VrFfYPaSogSm1PQhfS84OLmzLcXUW00PQYfZTl9LEJvBbMNGW5upmT08vxNxehVIAsLo2gvewuNOJ75q+x+Or1GBq4daASmF0vvVm085ter3zTe4zs1UxtmF5H70ZbZcet3j8IUB56Hi8qNBFtmB19y/hG22WH8qIZRuobCHlRoG09liSdTYcgePfHquTV8Ou/SqORbzl42HWhuCIcYSjYAdJ49vTHhh7nTQmHkfizfMMx8rR32/rF3aTW9HdNyjDkNGHbCDZWiFQC484gDrsIC7SY0M+LCWC7lQC3A7jrr7bE+2SvkbRr1m1sN0Dlcg/jKvRT9aub8xOkdnvxE9mamVqnVH6adUkphTJdHBzbaANt5RstNusiB4mi/KLSHzdDyf4TOhOf5Ps1w6ElA3w6xulSZuA/COZQb0hfgDJ4qdA0E6IxpmngwPSPsEl06lhZQB4xqeiMHGM4RtnjRrxDZ9ntE0t5yFQEk8ANSZJyjJ62JbzBZOlzoo/EzQckyGnhx5ou54ueJ7OQit0Ipcl2X3bPW1fiF6E7eZl22WA6S2WnF+TkeVVoC5nsBQqksLqTxK6e7hKOv8AJm/9nX+8uvuM1Y041UpW1EVPbIKvyf4oaCpTPbvD4RsbA40fovvH/bNZqke2NipDQ2zKlsRjxw8j98/7ZMp7I49eLUR+sx/0zRRUHtjb68ZUtIJYTZzED0q1MH1UufASwpbPDjVqvU6ibJ3fxl2zRp6wAJNgOk3sB7YbpHFHKKtKvE55h6Y3mr0wOjz1JPYBqZTVtvMODZA79dt1f2jf3Q0YrZBGWoDl7oN09t6ROqftX+EuMtz2jW0Um46DDVhHzh+qefN5PBigsNjSDTw0s8LRCz2mkeEVp6KBi1MQBFiIF3iKY3n6l19vR/PVOYgCOYRLDrOp+EDT8MvE+z8ZF2gx/wA3wtaqOKoQv2281feRJ4FgB/N+mBHyp421KlQB1djUbsXRb+0nuik3VW6gDyRA1YKwupRgQdQQWQazV8DhqdJbU0VAdSFAAJta5tMoyF7Vx1lVHfvN4L3zV6b6C0vJnif357Gd+eSVbCNfH0qfpML9A4k9ijWMfPK9XSlT3F/Ofj2hB8bR3BZZTp6hbt0sdWPaTrIee7RrhyKaKalZvRQdHK9paZFVtplO7hjUeozuGHE+aL9AUaTOxDTPcvxlai9fEuEVRdaQ4e0c4FTH5O41w6EGSN9GeoywUwey/ElbjoMlPj7dM3xvDLKcrhqoEjVsaB0yqp12qGwNpIXCLxY73hHLvorx2nYGnUxD7lFd49oCjrJMOcj2IVbNiGFRhruj+rHbzlfsXlVCtSfylNWs4tdQSPNHA2uJfnZfD/Vasn2K1RR3AybRIIqNEKAFAAHAAWAj6iDC7NgejisWP+ux/evHF2fr/VzDEjt8m3ishYmEWINrkuMH/qFU/qUR/wDGYr+isX/fq/sXD/8A1QAjiHlB8xxa/wDG1T9qlh2HuUSPVqZivCpRqDk9Eoe9ah8IaC4xI65ALyixWa4+9mw1I2/NrED3rGRm2LHHB91ZD4iVIVEtMRRg1/TmKH/BN/mpEPnuK/ulvtVR8FMNEtc6zRcOm+wvc7oF7C9idT0DSAmeZwcSpYoalOnYkDeTDUy2il29Ko1+Hoz3a7Ma9WlZ6aIFO95rMzHS1tVA6fdAot1ycstLxx2eq1LnoHUBZR2RVRlAG6WJ6dAF9mpJ90jgzryfNejoqEcCZY0M7rhQgfzV4eam9rza28faZXUQt9Y7iFQN5huLcZctTddDfZXaOsWO+S6gAtfUqLgXv2kCaVhiGUMuoIuJjGzmZ0KeIp1ayXVSAaaXAYeTYBt4njvBSR03M1fZvMFripUpralv+YDp0Det1X+MeSJwtwsUFntooGSby09Ant5xaBEMt2C9HE9g6JPw6636Br+HvkTCrpfpPh0SXvWAHPU9nAfGJUS11mOfKNjzVxtUA+bSVKY5aX3veTNbxmLFGlUqtwpozdw099pgGKrmo1Rz6TEMe0kmVhOU53hc7L0kJDsPODG3IDsmkYdhYWvMx2cBt7TNGwV7DslZFE32zoi86QpRAwT2b8/H4p21ZSApP1RcjTuE9nSr3CnVUm3mZVHxBolvo0tZRoCSL3PMx8ZNRWgjbm8zLckk+61p06LDm08uJAvjfNchdB/CRzPJ0wzv9NcekvLzYns+MmM5nTp0fH9WWfYg2VrMEezEecOBt0S/p42oPrt94zydLSlJm1YfXPtsfGW2VZ7VdgrBO2xv4zp0WUEE6mcxns6ZKMkxmvwM8nRhSVtTPFWdOlJLCxQUcp06MIuMwqMNVB9glQ+RYY8aKfdE6dBO+TZ2cwv6Fe6NtsvhP0Q7zOnQsg8qaOyeEP8AZn77fjOGyGE/Mb77fjOnQ8Z+H5U/htlcID/VX7WY+4mGeQ0FSnuqAFB0A0A0nToZdCXa0E686dIW6NV+gdBIB757OgExf4R5h5x7bewaDwnk6I4oflJrlcAQPruit1i5NvcJjqH0v1fjPJ00w6Rl2v8AZpRuj7Rh9g10nToZCH7dZnTp0kP/2Q==" title="novedad" alt="novedad" style="width:500px; height:300px;"></center>
+            <center><input type="button" style="margin-top: 50px;" class="btn btn-info" data-toggle="modal" data-target="#crearequipo" value="&nbsp;INSERTAR EQUIPO_COMPUTO"  style="width:40%"></center>
+            <br/><br/>
+            <div class="modal fade" id="crearequipo" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                         <center> <h5 class="modal-title" id="exampleModalLongTitle">REGISTRO DE EQUIPOS DE COMPUTO</h5></center>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                                <form action="/gestion_equipos" method="POST" enctype="multipart/form-data">
+                                        <br/>
+                                        <center><label class="col-form-label">SEDE:</label>
+                                            <select class="form-control" ng-model="sede" name="sede">
+                                                    <option value=" "></option>
+                                                  <option value="Sede Central (Av. Sexta)">Sede Central (Av. Sexta)</option>
+                                                  <option value="Sede Sur (ParqueSoft)">Sede Sur (ParqueSoft)</option>
+                                                  <option value="Sede Av. Estacion 1">Sede Av. Estacion 1</option>
+                                                </select>
+                                        <br/>
+                                        <label class="col-form-label">NOMBRE DE LA SALA:</label>
+                                        <input type="text" class="form-control" ng-model="nombre_sala" name="nombre_sala" placeholder="Ingrese El Nombre De La Sala" >
+                                        <br/>
+                                        <label class="col-form-label"> EQUIPO DE COMPUTO:</label> 
+                                        <select class="form-control" ng-model="equipo_computo" name="equipo_computo">
+                                                <option value=" "></option>
+                                              <option value="Portatil">Portatil</option>
+                                              <option value="Computador De Escritorio">Computador De Escritorio</option>
+                                            </select>
+                                        <br/>
+                                        <label class="col-form-label">DIRECCION MAC:</label> 
+                                        <input type="text" class="form-control" ng-model="direccion_mac" name="direccion_mac"  placeholder="Ingrese La Direccion Mac" >
+                                        <br/>
+                                        <label class="col-form-label"> SERIAL:</label> 
+                                        <input type="text" class="form-control" ng-model="serial" name="serial"  placeholder="Ingrese El serial Del Equipo" >
+                                        <br/>
+                                        <label class="col-form-label"> MARCA:</label> 
+                                        <input type="text" class="form-control" ng-model="marca" name="marca"  placeholder="Ingrese La Marca Del Equipo de Computo " >
+                                           <br/>
+                                           <label class="col-form-label"> CODIGO DE INVENTARIO:</label> 
+                                           <input type="text" class="form-control" ng-model="codigo_inventario" name="codigo_inventario"  placeholder="Ingrese El Codigo Del Inventario Del Equipo De Computo" >  
+                                           <br/>
+                                           <label class="col-form-label"> DESCRIPCION:</label> 
+                                           <textarea ng-model="descripcion" name="descripcion" class="form-control" rows="5"></textarea>
+                                           <br/>
+                                           <label class="col-form-label"> EVIDENCIA:</label>  
+                                           <input class="btn btn-primary" type="file"  name="foto" ng-model="foto"/>       
+                                        
+                                        
+                                    </center>
+                                    
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                          <button type="submit" class="btn btn-success">Guardar Registro</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>   
+                </form>
+                &nbsp;&nbsp;&nbsp;&nbsp;<label class="col-form-label">BUSQUEDA POR CUALQUIER ITEM:</label>
+            <input type="text" class="form-control" placeholder="Busqueda" ng-model="buscador" style="width:30%">
+                <table class="table">
+                  <thead>
+                      <tr>
+                          <th> Sede</th>
+                          <th> Nombre_Sala </th>
+                          <th> Equipo_Computo </th>
+                          <th> Direccion_Mac </th>
+                          <th> Serial_Equipo </th>
+                          <th> Marca </th>
+                          <th> Codigo_Inventario </th>
+                          <th> Descripcion </th>
+                          <th>Evidencia(Foto) </th>
+                          <th>Eliminar  </th>
+                          <th>Editar  </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="equipo in equipos |filter:buscador|orderBy:tipoOrden">
+                          <td> {{equipo.sede}} </td>
+                          <td> {{equipo.nombre_sala}} </td>
+                          <td> {{equipo.equipo_computo}} </td>
+                          <td> {{equipo.direccion_mac}} </td>
+                          <td> {{equipo.serial}} </td>
+                          <td> {{equipo.marca}} </td>
+                          <td> {{equipo.codigo_inventario}} </td>
+                          <td> {{equipo.descripcion}} </td>
+                          <td> <img height="200" width="200" ng-src="{{equipo.foto}}"> </td>
+                          <td> <a class="btn btn-danger" ng-click="eliminarEquipos(equipo.id)"> Eliminar </a> </td>
+                          <td> <a class="btn btn-info" data-toggle="modal" data-target="#editarequipo" ng-click="recuperarEquipos(equipo.id)"> Editar </a> </td>
+                          <div class="modal fade" id="editarequipo" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                 <center> <h5 class="modal-title" id="exampleModalLongTitle">ACTUALIZAR EQUIPOS DE COMPUTO</h5></center>
+                                  <button type="button" class="close" data-dismiss="modal" ng-click="limpiarDatos()" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                        <form action="/gestion_equipos" method="POST" enctype="multipart/form-data">
+                                                <br/>
+                                                <center><label class="col-form-label">SEDE:</label>
+                                                    <select class="form-control" ng-model="sede" name="sede">
+                                                            <option value=" "></option>
+                                                          <option value="Sede Central (Av. Sexta)">Sede Central (Av. Sexta)</option>
+                                                          <option value="Sede Sur (ParqueSoft)">Sede Sur (ParqueSoft)</option>
+                                                          <option value="Sede Av. Estacion 1">Sede Av. Estacion 1</option>
+                                                        </select>
+                                                <br/>
+                                                <label class="col-form-label">NOMBRE DE LA SALA:</label>
+                                                <input type="text" class="form-control" ng-model="nombre_sala" name="nombre_sala" placeholder="Ingrese El Nombre De La Sala" >
+                                                <br/>
+                                                <label class="col-form-label"> EQUIPO DE COMPUTO:</label> 
+                                                <select class="form-control" ng-model="equipo_computo" name="equipo_computo">
+                                                        <option value=" "></option>
+                                                      <option value="Portatil">Portatil</option>
+                                                      <option value="Computador De Escritorio">Computador De Escritorio</option>
+                                                    </select>
+                                                <br/>
+                                                <label class="col-form-label">DIRECCION MAC:</label> 
+                                                <input type="text" class="form-control" ng-model="direccion_mac" name="direccion_mac"  placeholder="Ingrese La Direccion Mac" >
+                                                <br/>
+                                                <label class="col-form-label"> SERIAL:</label> 
+                                                <input type="text" class="form-control" ng-model="serial" name="serial"  placeholder="Ingrese El serial Del Equipo" >
+                                                <br/>
+                                                <label class="col-form-label"> MARCA:</label> 
+                                                <input type="text" class="form-control" ng-model="marca" name="marca"  placeholder="Ingrese La Marca Del Equipo de Computo " >
+                                                   <br/>
+                                                   <label class="col-form-label"> CODIGO DE INVENTARIO:</label> 
+                                                   <input type="text" class="form-control" ng-model="codigo_inventario" name="codigo_inventario"  placeholder="Ingrese El Codigo Del Inventario Del Equipo De Computo" >  
+                                                   <br/>
+                                                   <label class="col-form-label"> DESCRIPCION:</label> 
+                                                   <textarea ng-model="descripcion" name="descripcion" class="form-control" rows="5"></textarea>
+                                                   <br/>
+                                                   <label class="col-form-label"> EVIDENCIA:</label>  
+                                                   <label class="col-form-label"> ¡¡¡¡¡NO PUEDES CAMBIAR DE IMAGEN, SOLO AL INGRESAR UN DATO!!!!!</label>                 
+                                            </center>
+                                          </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="limpiarDatos()">Cancelar</button>
+                                  <button type="button" class="btn btn-success" ng-click="modificarEquipos()" data-dismiss="modal" >Guardar Registro</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>   
+                        
+</tr>
+</tbody>
+</table>
+                  </div>   
+                  
+</body>
+</html>

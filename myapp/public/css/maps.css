@@ -1,0 +1,56 @@
+body{
+    font: bold 12px Arial;
+}
+
+a{
+text-decoration: none;
+}
+
+#form-control{
+    box-shadow: 3px 3px 10px gray;
+    padding: 5px;
+    border: 5px solid black;
+    border-radius: 10px;
+    position: absolute;
+    right: 38%;
+}
+#form-control1{
+    box-shadow: 3px 3px 10px gray;
+    padding: 5px;
+    border: 5px solid black;
+    border-radius: 10px;
+    position: absolute;
+    right: 33%;
+    margin-top: 130px;
+}
+#form-control2{
+    box-shadow: 3px 3px 10px gray;
+    padding: 5px;
+    border: 5px solid black;
+    border-radius: 10px;
+    position: absolute;
+    right: 73%;
+    margin-top: 130px;
+}
+#map{
+    height: 500px;
+    width: 500px;
+    box-shadow: 3px 3px 10px gray;
+    float: left;
+    border: 5px solid white;
+    border-radius: 10px;
+    margin-right: 20px;
+    
+}
+
+#country_container{
+    width: 1000px;
+    margin: 13px 3px 3px 0px;
+    text-align: center;
+    padding: 4px;
+    display: inline-table;
+    color: white;
+    background-color: black;
+    font-size: 12px;
+}
+

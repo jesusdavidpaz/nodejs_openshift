@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="aplicacion">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>listado novedades profesor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/script_novedad.js"></script>
+
+<style>
+        #map {
+         height: 450px;
+         width: 100%;
+        }
+     </style>
+     <script>
+            function initMap() {
+              var center = {lat: 3.333087, lng: -76.524260};
+              var sur= [{title: 'sede sur',lat: 3.333087, lng: -76.524260}];
+              var norte=[{title: "sede norte",lat: 3.472282, lng: -76.527164}];
+              var av=[{title: "sede av estacion", lat: 3.467109, lng: -76.525104}];  
+                 
+          
+              var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              });
+  
+              for(i=0; i<sur.length; i++ ){
+                  var marker = new google.maps.Marker({
+                position: sur[i],
+                map: map,
+                title:"Sede Sur"
+                
+                
+              });
+              }
+              for(i=0; i<norte.length; i++ ){
+                  var marker = new google.maps.Marker({
+                position: norte[i],
+                map: map,
+                title:"Sede Norte (Av. Sexta)"
+              });
+              }
+              for(i=0; i<av.length; i++ ){
+                  var marker = new google.maps.Marker({
+                position: av[i],
+                map: map,
+                title:"Sede Av. Estacion"
+              });
+              }
+            }
+          </script>
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE71Oosfw_eodHjT544XRLN0PzOwRxa20&callback=initMap">
+          </script>
+
+</head>
+<body ng-controller="novedad" ng-init="cargarNovedad()">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="/menu_profesor"><img style="width: 100px; height: 40px; margin-top: -10px;" src="img/images.png"></a>
+                  </div>
+                  <ul class="nav navbar-nav">
+                    <li ><a href="/visualizar_novedades_profesor">Visualizar Novedades</a></li>
+                    <li><a href="/visualizar_equipos_profesor">Visualizar Estado Equipos(Computo)</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                        
+                         <li><a href="/login_profesor"><span class="glyphicon glyphicon glyphicon-home"></span> SALIR</a></li>
+                  </ul>
+                 
+                </div>
+            </nav> 
+        <br/><br/><br/>  
+        <center><h1>LISTADO DE NOVEDADES</h1></center>
+        <hr style="border-style: inset;">
+        &nbsp;&nbsp;&nbsp;&nbsp;<label class="col-form-label">BUSQUEDA POR CUALQUIER ITEM:</label>
+        <input type="text" class="form-control" placeholder="Busqueda" ng-model="buscador" style="width:30%">
+        <hr style="border-style: inset;">
+        <div ng-repeat="novedad in novedades |filter:buscador|orderBy:tipoOrden" style="margin-left: 14px">
+            <div class="row">
+              <div class="col-sm-6">
+         <tr>
+          <td><label style="font-size: 20px">Nombre De La Sala: </label></td>
+          <td><label style="font-size: 20px"> {{novedad.nombre}}</label></td>
+        </tr>
+        <br/>
+        <tr>
+        <td><label style="font-size: 20px">Sede Universitaria: </label></td>
+        <td><label style="font-size: 20px">{{novedad.sede}}</label></td>
+        </tr>
+        <br/>
+        <tr>
+          <td><label style="font-size: 20px">Hora y Fecha Novedad: </label></td>
+          <td><label style="font-size: 20px"> {{novedad.fecha_hora}} </label></td>
+        </tr>
+        <br/>
+        <tr>
+          <td><label style="font-size: 20px">Tipo de Novedad: </label></td>
+          <td><label style="font-size: 20px"> {{novedad.tipo_novedad}} </label></td>
+        </tr>
+        <br/>
+        <tr>
+            <td> <a class="btn btn-info" data-toggle="modal" data-target="#editarnovedad" > Vista Personalizada Universidad </a> </td>
+            <div  class="modal fade" id="editarnovedad" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div style="width: 1200px" class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                     <center> <h5 class="modal-title" id="exampleModalLongTitle">MAPA PERSONALIZADO</h5></center>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                            <form >
+                                    <br/>
+                                    <iframe src="/google_maps" width="1350" height="800" frameborder="0"></iframe>
+                              </form>
+                    </div>
+        
+                  </div>
+                </div>
+              </div>  
+
+          </tr>
+        
+        </div>
+        <br/>
+        <div class="col-sm-6">
+            <td><label style="font-size: 20px">Evidencia Fotografica: </label></td>
+            <br/>
+          <td> <img height="300" width="300" ng-src="{{novedad.foto}}"> </td>
+          </div>
+        </div>  
+        
+        <hr style="border-style: inset;">
+        </div>
+          <center><h1>MAPS UNIAJC</h1></center>
+        <div id="map"></div>
+         
+</body>
+</html>

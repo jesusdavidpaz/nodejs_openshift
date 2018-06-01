@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mapsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mapas</title>
+<link rel="stylesheet" href="css/maps.css">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE71Oosfw_eodHjT544XRLN0PzOwRxa20"></script>
+<script type="text/javascript" src="js/maps.js"></script>
+
+
+</head>
+<body>
+    <div ng-controller="MapCtrl" >
+    <table id="form-control" >
+<tr>
+    <td><label>Ingrese Latitud</label></td>
+    <td><input type="number" ng-model="markerLat" required="" ></td>
+</tr>
+<tr>
+    <td><label>Ingrese Longitud</label></td>
+    <td><input type="number" ng-model="markerLng"  required="" ng-model="defaultLng"></td>
+</tr>
+<tr>
+    <td><label> Nombre de Sede</label></td>
+    <td><input type="text" ng-model="infoTitle" ng-value="cali" required="" ></td>
+</tr>
+<tr>
+    <td><button class="button" ng-click="addMarker(markerLat,markerLng,infoTitle)">Agregar</button></td>
+</tr>
+    </table>
+    <table id="form-control1">
+            <tr>
+                    <td>COORDENADAS DE LAS DIFERENTES SEDES UNIAJC</td>
+                </tr>  
+        <tr>
+            <td>Sede sur Latitud: 3.333087 Longitud: -76.524260</td>
+        </tr>
+        <tr>
+            <td>Sede Norte(Av. Sexta) Latitud: 3.472282 Longitud: -76.527164</td>
+        </tr>
+        <tr>
+                <td>Sede Av. Estacion Latitud: 3.467109 Longitud: -76.525104</td>
+            </tr>
+    </table>
+</div>
+<div id="map">
+</div>
+
+</body>
+</html>

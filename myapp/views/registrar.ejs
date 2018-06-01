@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+<div class="col-sm-6">
+ <div class="card mt-5">
+ <div class="card-body">
+<h1 class="text-center">    
+<span class="fa fa-sign-in"></span>Registrar
+</h1>
+<% if(message.length > 0) { %>
+ <div class="alert alert-danger">
+  <%= message %>   
+ </div>
+ <% } %>
+<form action="/registrar" method="post">
+    <div class="form-group">
+        <label for=usuario>usuario</label>    
+        <input type="text" name="usuario" class="form-control">
+        </div>    
+<div class="form-group">
+<label for=email>Email</label>    
+<input type="email" name="email" class="form-control">
+</div>    
+<div class="form-group">
+<label for=password>Password</label>    
+<input type="password" name="password" class="form-control">
+</div>    
+ <input type="submit" class="btn btn-dark btn-lg">       
+</form>
+<hr>
+<div class="text-center">
+<p>Ya tienes cuenta <a href="/login">Login</a></p>
+<p>o ve al <a href="/">Inicio</a>.</p>
+</div>
+ </div>    
+
+ </div>   
+
+</div>
+</div>
+    
+</body>
+</html>
